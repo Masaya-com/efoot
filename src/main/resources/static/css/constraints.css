@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+/* =====================
+   Root Variables
+   ===================== */
+:root {
+  --bg:    #f6f7fb;
+  --card:  #fff;
+  --ink:   #111;
+  --muted: #6b7280;
+  --pri:   #2563eb;
+  --pri-600: #1d4ed8;
+  --ok:    #34d399;
+  --warn:  #f87171;
+  --border: #e5e7eb;
+}
+
+/* =====================
+   Base Styles
+   ===================== */
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Noto Sans JP', Arial, sans-serif;
+  margin: 0;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 28px auto;
+  padding: 0 16px;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+
+/* =====================
+   Grid & Card
+   ===================== */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,.04);
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* =====================
+   Buttons
+   ===================== */
+.btn {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn.secondary {
+  background: #f3f4f6;
+  color: var(--ink);
+  border: 1px solid var(--border);
+}
+
+.btn.danger {
+  background: #fff1f2;
+  color: #b91c1c;
+  border: 1px solid #b91c1c;
+}
+
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+/* =====================
+   Inputs & Selects
+   ===================== */
+input,
+select {
+  background: #fff;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 8px;
+}
+
+/* =====================
+   Table
+   ===================== */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 8px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+}
+
+thead th {
+  font-weight: 600;
+  color: #2563eb;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+tbody tr {
+  background: #fff;
+  border: 1px solid var(--border);
+}
+
+/* =====================
+   Chips
+   ===================== */
+.chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.chip {
+  background: #f9fafb;
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: #374151;
+}
+
+/* =====================
+   Flash Messages
+   ===================== */
+.flash {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.flash.ok {
+  background: #ecfdf5;
+  color: #064e3b;
+}
+
+.flash.info {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.flash.err {
+  background: #fef2f2;
+  color: #7f1d1d;
+}
+
+/* ===== Constraints: 保存/読み込み ===== */
+.page-constraints .grid{ gap:14px }
+.page-constraints .card{ padding:14px }
+
+/* 検索バーを段組→縦積みへ */
+.page-constraints .search-row{
+  display:grid; grid-template-columns:1fr 160px 120px; gap:8px; align-items:center;
+}
+@media (max-width: 740px){
+  .page-constraints .search-row{ grid-template-columns:1fr; }
+}
+
+/* テーブルは横スクロール */
+.page-constraints .table-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch }
+.page-constraints table{ min-width:720px }
+.page-constraints th,.page-constraints td{ white-space:nowrap }
+
+/* モバイルで非表示にする列 */
+@media (max-width:560px){
+  .page-constraints .col-id,
+  .page-constraints .col-updated{ display:none }
+}
+
+/* 操作セルのボタンを伸縮 */
+.page-constraints td .btn{ margin-right:6px }
+@media (max-width:560px){
+  .page-constraints td .btn{ width:100%; margin:6px 0 0 }
+}
+
+/* 左側プレビューのチップ群は2行で切る */
+.page-constraints .chips{
+  max-height:72px; overflow:hidden;
+}

@@ -1,0 +1,58 @@
+<!-- src/main/resources/templates/formation.html -->
+<!doctype html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>フォーメーション作成</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/formation.css}">
+  <script th:src="@{/js/formation.js}" defer></script>
+</head>
+<body>
+<div class="container">
+
+  <h1>フォーメーション作成</h1>
+
+  <form th:action="@{/formation/next}" method="post" id="form">
+    <div class="panel">
+      <div class="row">
+        <label class="muted">フォーメーション名</label>
+        <input class="name" type="text" name="formationName" th:value="${formationName}" placeholder="4-3-3">
+        <label class="muted">プリセット</label>
+        <select id="preset">
+          <option value="433">4-3-3</option>
+          <option value="442">4-4-2</option>
+        </select>
+        <button class="btn secondary" type="button" id="applyPreset">配置反映</button>
+      </div>
+      <div class="row">
+        <a class="btn secondary" th:href="@{/top}">戻る</a>
+        <button class="btn" type="submit">決定</button>
+      </div>
+    </div>
+
+    <!-- CSRF（Security未導入でも動くようにガード） -->
+    <input th:if="${_csrf != null}" type="hidden"
+           th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    <!-- ピッチ -->
+    <div class="board">
+      <div class="pitch"></div>
+      <div class="halfline"></div>
+
+      <!-- 11枠：xPct=-35..35 / yPct=10..90 を data 属性で持ち、JSで位置に変換 -->
+      <div th:each="s,st : ${slots}"
+           class="slot"
+           th:attr="data-index=${st.index},data-x=${s.XPct},data-y=${s.YPct}">
+        <div class="dot"></div>
+        <input class="label" type="text" name="label" th:value="${s.label}" maxlength="16" />
+        <div class="coord">x:<span class="cx" th:text="${s.XPct}">0</span> y:<span class="cy" th:text="${s.YPct}">0</span></div>
+        <!-- 提出用（ドラッグで更新） -->
+        <input type="hidden" name="xPct" th:value="${s.XPct}"/>
+        <input type="hidden" name="yPct" th:value="${s.YPct}"/>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
