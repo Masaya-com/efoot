@@ -1,20 +1,14 @@
 server:
   port: ${PORT:8080}
   servlet:
-    context-path: /efoot   # すでに使っているならそのまま
+    context-path: /efoot   # 直下で出したいなら "/" に
 
 spring:
   datasource:
-    url: ${JDBC_URL:}
-    username: ${DB_USER:}
+    url: ${JDBC_URL:jdbc:h2:mem:efoot;MODE=MySQL}
+    username: ${DB_USER:sa}
     password: ${DB_PASSWORD:}
   jpa:
     hibernate:
       ddl-auto: update
-    properties:
-      hibernate:
-        format_sql: true
-        jdbc.time_zone: UTC
-logging:
-  level:
-    org.hibernate.SQL: warn
+    open-in-view: false
