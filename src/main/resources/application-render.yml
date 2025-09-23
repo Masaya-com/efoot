@@ -1,15 +1,11 @@
 server:
-  port: ${PORT:8080}          # Render が渡すポートに合わせる
+  port: ${PORT:8080}
   servlet:
     context-path: /efoot
 
 spring:
   datasource:
-    url: jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME}\
-      ?sslMode=${DB_SSL_MODE:REQUIRED}\
-      &characterEncoding=utf8\
-      &serverTimezone=Asia/Tokyo\
-      &allowPublicKeyRetrieval=true
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT:3306}/${DB_NAME}?sslMode=${DB_SSL_MODE:REQUIRED}&characterEncoding=utf8&serverTimezone=Asia/Tokyo&allowPublicKeyRetrieval=true
     username: ${DB_USER}
     password: ${DB_PASS}
     driver-class-name: com.mysql.cj.jdbc.Driver

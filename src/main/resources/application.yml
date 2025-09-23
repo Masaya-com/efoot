@@ -14,3 +14,4 @@ spring:
     url: jdbc:mysql://localhost:3306/efoot?useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Tokyo
     username: root
     password: your_password
+
